@@ -5,7 +5,7 @@ package co.edu.eafit.jsrules.webpage;
  * @author sebastian
  *
  */
-class FormAttribute {
+class FormElement {
 
 	private String name;
 	private String id;
