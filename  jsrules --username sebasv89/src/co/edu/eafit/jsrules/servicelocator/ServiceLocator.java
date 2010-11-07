@@ -9,7 +9,7 @@ import org.jdom.input.SAXBuilder;
 
 public class ServiceLocator {
 
-	private static HashMap<Class, String> serviceDefinition;
+	private static HashMap<Class<? extends Service>, String> serviceDefinition;
 
 	@SuppressWarnings("unchecked")
 	public synchronized static <T extends Service> T getService(Class<? extends Service> c) {
@@ -17,7 +17,9 @@ public class ServiceLocator {
 			try {
 				loadServiceDefinition();
 			} catch (Exception e) {
+				System.out.println("error!");
 				throw new RuntimeException("error loading services!");
+				
 			}
 		}
 		String className = serviceDefinition.get(c);
@@ -32,7 +34,7 @@ public class ServiceLocator {
 	}
 
 	private static void loadServiceDefinition() throws Exception{
-		serviceDefinition = new HashMap<Class, String>();
+		serviceDefinition = new HashMap<Class<? extends Service>, String>();
 		SAXBuilder sb = new SAXBuilder(false);
 		Document doc1 = sb.build("resources/serviceLocator.xml");
 		Element root = doc1.getRootElement();
