@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validationschema>
+	<validationgroup id="" formid="" formname="">
+		<validationElement formElementId="nombre">
+			<validations>
+				<validation>
+					<type>required</type>
+				</validation>
+				<validation>
+					<type>range</type>
+					<min>0</min>
+					<max>100</max>
+				</validation>
+				<validation>
+					<type>regularExpression</type>
+					<regularExpression>[asdsadsad]</regularExpression>
+				</validation>
+			</validations>
+		</validationElement>
+	</validationgroup>
+</validationschema>
