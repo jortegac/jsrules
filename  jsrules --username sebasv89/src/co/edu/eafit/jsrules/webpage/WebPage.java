@@ -23,4 +23,16 @@ public class WebPage implements IWebPage {
 		return "hola mundo";
 	}
 
+    @Override
+    public boolean isValidWebPage(String webPageString) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasAtLeastOneForm(String webPageString) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }
