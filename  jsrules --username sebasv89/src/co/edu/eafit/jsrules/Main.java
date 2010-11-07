@@ -1,7 +1,7 @@
 package co.edu.eafit.jsrules;
 
+import co.edu.eafit.jsrules.interfaces.IWebPage;
 import co.edu.eafit.jsrules.servicelocator.ServiceLocator;
-import co.edu.eafit.jsrules.webpage.IWebPage;
 
 public class Main {
 

@@ -1,6 +1,7 @@
 package co.edu.eafit.jsrules.webpage;
 
 import co.edu.eafit.jsrules.common.WebFormDetails;
+import co.edu.eafit.jsrules.interfaces.IWebPage;
 
 /**
  * Implements the interface IWebPage.

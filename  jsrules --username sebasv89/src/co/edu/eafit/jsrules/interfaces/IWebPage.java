@@ -1,4 +1,4 @@
-package co.edu.eafit.jsrules.webpage;
+package co.edu.eafit.jsrules.interfaces;
 
 import co.edu.eafit.jsrules.common.WebFormDetails;
 import co.edu.eafit.jsrules.servicelocator.Service;
