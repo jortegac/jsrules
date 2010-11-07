@@ -25,5 +25,13 @@ public interface IValidationManager extends Service {
 	 */
 	boolean validateSchema (String schema, String webPageString);
 	
+	/**
+	 * Generates a script of validation with the given schema.
+	 * @param schema schema of validation.
+	 * @return String with the script, or an empty String if there is an error.
+	 */
+	String generateScript(String schema);
+	
+	
 	
 }
