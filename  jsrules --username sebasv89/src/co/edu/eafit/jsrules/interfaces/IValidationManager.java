@@ -1,5 +1,7 @@
 package co.edu.eafit.jsrules.interfaces;
 
-public class IValidationManager {
+import co.edu.eafit.jsrules.servicelocator.Service;
+
+public interface IValidationManager extends Service {
 
 }
