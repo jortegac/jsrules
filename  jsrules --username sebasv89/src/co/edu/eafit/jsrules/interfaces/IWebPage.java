@@ -15,7 +15,7 @@ public interface IWebPage extends Service {
 	 * @param webPageString - The contents of a HTML web page
 	 * @return A list of WebFormDetails
 	 */
-	WebFormDetails[] getFormList(String webPageString);
+	WebFormDetails[] getFormList (String webPageString) throws Exception ;
 	
 	/**Validates if a HTML web page is valid
 	 * 

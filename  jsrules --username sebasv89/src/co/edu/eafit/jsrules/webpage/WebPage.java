@@ -24,7 +24,8 @@ public class WebPage implements IWebPage {
     }
     
 	@Override
-	public WebFormDetails[] getFormList(String webPageString) {    
+	public WebFormDetails[] getFormList(String webPageString) throws Exception 
+	{    
 			    
 	    WebForm[] webFormList = parserProxy.getFormList(webPageString);
 	    
@@ -32,6 +33,11 @@ public class WebPage implements IWebPage {
 	    
 	    for (int i = 0; i < webFormList.length; i++) {
 	        WebFormDetails formDetails = new WebFormDetails();
+	        
+	        if(webFormList[i].getId() == null)
+	        {
+	            throw new Exception("The form must have an id tag");
+	        }
 	        
 	        formDetails.setId(webFormList[i].getId());	        
 	        
