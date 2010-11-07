@@ -2,38 +2,26 @@ package co.edu.eafit.jsrules.common;
 
 
 /**
- * 
+ * DTO of a web form
  * @author sebastian
  *
  */
 public class WebFormDetails {
 
-	private String name;
-	private FormAttributeDetails[] attributesList;
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+	private String id;
+	private FormElementDetails[] elementList;
+
+	
 	/**
 	 * @return the attributesList
 	 */
-	public FormAttributeDetails[] getAttributesList() {
-		return attributesList;
+	public FormElementDetails[] getElementList() {
+		return elementList;
 	}
 	/**
-	 * @param attributesList the attributesList to set
+	 * @param elementList the attributesList to set
 	 */
-	public void setAttributesList(FormAttributeDetails[] attributesList) {
-		this.attributesList = attributesList;
+	public void setAttributesList(FormElementDetails[] elementList) {
+		this.elementList = elementList;
 	}
-	
-	
 }

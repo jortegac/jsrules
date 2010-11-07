@@ -5,24 +5,26 @@ package co.edu.eafit.jsrules.common;
  * @author sebastian
  *
  */
-public class FormAttributeDetails {
+public class FormElementDetails {
 
 	
 	
-	private String name;
+	private String id;
 	private String type;
+
+	
 	
 	/**
-	 * @return the name
+	 * @return the id
 	 */
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
 	/**
-	 * @param name the name to set
+	 * @param id the id to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setId(String id) {
+		this.id = id;
 	}
 	/**
 	 * @return the type
