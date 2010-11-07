@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serviceLocator>
 	<service>
-		<interface>co.edu.eafit.jsrules.webpage.IWebPage</interface>
+		<interface>co.edu.eafit.jsrules.interfaces.IWebPage</interface>
 		<className>co.edu.eafit.jsrules.webpage.WebPage</className>
 	</service>
 </serviceLocator>
