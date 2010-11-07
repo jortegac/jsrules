@@ -7,7 +7,9 @@ import org.jdom.output.XMLOutputter;
 
 import co.edu.eafit.jsrules.common.FormElementDetails;
 import co.edu.eafit.jsrules.common.WebFormDetails;
+import co.edu.eafit.jsrules.interfaces.IValidateWebPage;
 import co.edu.eafit.jsrules.interfaces.IValidationManager;
+import co.edu.eafit.jsrules.servicelocator.ServiceLocator;
 
 /**
  * Implements the services offered by the IValidationManager interface.
@@ -53,14 +55,14 @@ public class ValidationManager implements IValidationManager {
 
 	@Override
 	public boolean validateSchema(String schema, String webPageString) {
-		// TODO Auto-generated method stub
-		return false;
+		return true; //TODO! esta mierda creo q vuela.
 	}
 
 	@Override
 	public String generateScript(String schema) {
-		// TODO Auto-generated method stub
+		JavaScriptGenerator generator = new JavaScriptGenerator();
 		return null;
 	}
+	
 
 }
