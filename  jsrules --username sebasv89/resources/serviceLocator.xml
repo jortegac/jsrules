@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serviceLocator>
 	<service>
+		<interface>co.edu.eafit.jsrules.interfaces.IScriptGeneration</interface>
+		<className>co.edu.eafit.jsrules.scriptgeneration.ScriptGeneration</className>
+	</service>
+	<service>
+		<interface>co.edu.eafit.jsrules.interfaces.IValidateWebPage</interface>
+		<className>co.edu.eafit.jsrules.validatewebpage.ValidateWebPage</className>
+	</service>
+	<service>
+		<interface>co.edu.eafit.jsrules.interfaces.IValidationManager</interface>
+		<className>co.edu.eafit.jsrules.validationmanager.ValidationManager</className>
+	</service>
+	<service>
+		<interface>co.edu.eafit.jsrules.interfaces.IValidationSchema</interface>
+		<className>co.edu.eafit.jsrules.validationschema.ValidationSchema</className>
+	</service>
+	<service>
 		<interface>co.edu.eafit.jsrules.interfaces.IWebPage</interface>
 		<className>co.edu.eafit.jsrules.webpage.WebPage</className>
-	</service>
+	</service>	
 </serviceLocator>
