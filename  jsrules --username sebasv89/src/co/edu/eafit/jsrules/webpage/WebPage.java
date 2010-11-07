@@ -1,37 +1,67 @@
 package co.edu.eafit.jsrules.webpage;
 
+import java.util.ArrayList;
+
+import co.edu.eafit.jsrules.common.FormElementDetails;
 import co.edu.eafit.jsrules.common.WebFormDetails;
 import co.edu.eafit.jsrules.interfaces.IWebPage;
 
 /**
  * Implements the interface IWebPage.
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public class WebPage implements IWebPage {
 
+    HTMLParserProxy parserProxy = new HTMLParserProxy();
+    
+    /**
+     * Constructor
+     */
+    public WebPage() {
+        parserProxy = new HTMLParserProxy();
+    }
+    
 	@Override
-	public WebFormDetails[] getFormList(String webPage) {
-		/*TODO AQUI VOY A PONER COMO LEER LA PAGINA, PERO COMO AQUI USAMOS EL PARSER HTML
-		 * ESTO DEBERIA IR CON UN PROXY O ALGO ASI.
-		 */
-		return null;
+	public WebFormDetails[] getFormList(String webPageString) {    
+			    
+	    WebForm[] webFormList = parserProxy.getFormList(webPageString);
+	    
+	    WebFormDetails[] webFormDetailsList = new WebFormDetails[webFormList.length];
+	    
+	    for (int i = 0; i < webFormList.length; i++) {
+	        WebFormDetails formDetails = new WebFormDetails();
+	        
+	        formDetails.setId(webFormList[i].getId());	        
+	        
+            FormElementDetails[] elementDetailsList = new FormElementDetails[webFormList[i].getFormElementList().length];
+            
+	        for (int j = 0; j < webFormList[i].getFormElementList().length; j++) {
+	            FormElementDetails elementDetails = new FormElementDetails();
+	            elementDetails.setId(webFormList[i].getFormElementList()[j].getId());	 
+	            
+	            elementDetailsList[j] = elementDetails;
+            }
+	        
+	        formDetails.setAttributesList(elementDetailsList);        
+	        
+	        webFormDetailsList[i] = formDetails;
+        }
+	    
+		return webFormDetailsList;
 		
 	}
 	
-	public String holaMundo() {
-		return "hola mundo";
-	}
-
     @Override
     public boolean isValidWebPage(String webPageString) {
-        // TODO Auto-generated method stub
-        return false;
+
+        return parserProxy.isValidWebPage(webPageString);
     }
 
     @Override
     public boolean hasAtLeastOneForm(String webPageString) {
-        // TODO Auto-generated method stub
+
         return false;
     }
 

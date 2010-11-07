@@ -67,7 +67,7 @@ public class HTMLParserProxyVisitor extends NodeVisitor  {
             
             if (formId != null) {
                 // Set the form name in the webForm object
-                webForm.setId(formName);
+                webForm.setName(formName);
             }
             
             ArrayList<FormElement> formElements = new ArrayList<FormElement>();
@@ -96,10 +96,11 @@ public class HTMLParserProxyVisitor extends NodeVisitor  {
                 
             }
             
-            webForm.setFormElementList((FormElement[]) formElements.toArray());
+            FormElement[] tmpFormElement = new FormElement[formElements.size()];
             
+            tmpFormElement = formElements.toArray(tmpFormElement);
             
-            
+            webForm.setFormElementList(tmpFormElement);            
             
             webFormList.add(webForm);
         }

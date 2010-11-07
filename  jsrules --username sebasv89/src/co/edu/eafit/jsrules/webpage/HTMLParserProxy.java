@@ -5,8 +5,10 @@ package co.edu.eafit.jsrules.webpage;
 
 import java.util.ArrayList;
 
+import org.htmlparser.Parser;
+import org.htmlparser.util.ParserException;
+
 import co.edu.eafit.jsrules.common.WebFormDetails;
-import co.edu.eafit.jsrules.interfaces.IHTMLParserProxy;
 
 /**
  * @author Julian
@@ -23,8 +25,14 @@ public class HTMLParserProxy implements IHTMLParserProxy {
      */
     @Override
     public boolean isValidWebPage(String webPageString) {
-
-        return false;
+        
+        try {
+            Parser p = new Parser(webPageString);
+        } catch (ParserException e) {
+            System.out.println("Error tratando de realizar el parser HTML");
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -35,18 +43,16 @@ public class HTMLParserProxy implements IHTMLParserProxy {
      * .String)
      */
     @Override
-    public WebFormDetails[] getFormList(String webPageString) {
+    public WebForm[] getFormList(String webPageString) {
+        
         HTMLParserProxyVisitor visitor = new HTMLParserProxyVisitor();
         ArrayList <WebForm> webFormlist = visitor.getFormList(webPageString);
         
-        ArrayList <WebFormDetails> webFormDetails = new ArrayList<WebFormDetails>();
+        WebForm[] tmpWebFormList = new WebForm[webFormlist.size()];
         
-        for (int i = 0; i < webFormlist.size(); i++) {
-            WebFormDetails formDetails = new WebFormDetails();
-            
-        }
+        tmpWebFormList = webFormlist.toArray(tmpWebFormList);
         
-        return null;
+        return tmpWebFormList;        
     }
 
 }
