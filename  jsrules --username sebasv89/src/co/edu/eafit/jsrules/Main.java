@@ -12,6 +12,8 @@ public class Main {
 		IWebPage iWebPage = ServiceLocator.getService(IWebPage.class);
 		System.out.println(iWebPage.holaMundo());
 		
+		System.out.println("probando!!!");
+		
 	}
 
 }
