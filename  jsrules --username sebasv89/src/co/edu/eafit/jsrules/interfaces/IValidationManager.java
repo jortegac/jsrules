@@ -10,12 +10,11 @@ import co.edu.eafit.jsrules.servicelocator.Service;
 public interface IValidationManager extends Service {
 
 	/**
-	 * Create an XML schema for a web page given as a parameter. 
-	 * @param webPageString web page String to be validated.
+	 * Create an XML schema for a list of forms given as a parameter. 
 	 * @param formList list of forms to create the schema.
 	 * @return The string of the xml, or an empty String in case of error.
 	 */
-	String createSchema(WebFormDetails[] formList, String webPageString);
+	String createSchema(WebFormDetails[] formList);
 	
 	/**
 	 * Validates that the schema is valid, and is valid for the web page. 
