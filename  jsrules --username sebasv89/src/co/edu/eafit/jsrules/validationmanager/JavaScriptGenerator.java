@@ -1,6 +1,7 @@
 package co.edu.eafit.jsrules.validationmanager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,7 +21,7 @@ class JavaScriptGenerator {
 	
 	
 	private static final String FUNCTION_PREFIX = "validationFunction_";
-	private static final String FUNCTION_GROUP_PREFIX = "groupFunction_";
+	private static final String FUNCTION_GROUP_PREFIX = "validateForm_";
 	/**
 	 * Default constructor.
 	 */
@@ -34,26 +35,58 @@ class JavaScriptGenerator {
 	 * @return
 	 */
 	public String generateJavaScriptString() {
-		return null;//TODO
+		bufferOfFile = new StringBuffer();
+		//add all the functions to the buffer.
+		for (List<JavaScriptFunction> list : hashMapOfSuites.values()) {
+			for (JavaScriptFunction function : list) {
+				bufferOfFile.append(function.generateFunctionCode());
+				bufferOfFile.append("\n");
+			}
+		}
+		//add the functions for validating a complete form.
+		for (String key : hashMapOfSuites.keySet()) {
+			String code = generateFunctionGroup(key, hashMapOfSuites.get(key));
+			bufferOfFile.append(code);
+			bufferOfFile.append("\n");
+		}
+		return bufferOfFile.toString();
 	}
 	
+	/**
+	 * Generate the code of a group of validations.
+	 * @param key key of the validation group
+	 * @param list list of functions for that group.
+	 * @return the code with the function that validates that group.
+	 */
+	private String generateFunctionGroup(String key,
+			List<JavaScriptFunction> list) {
+		StringBuffer bufferOfGroup = new StringBuffer();
+		bufferOfGroup.append("function " + FUNCTION_GROUP_PREFIX + key + "(){\n");
+		for (JavaScriptFunction function : list) {
+			bufferOfGroup.append("if(!" + function.getFunctionName() + "()) { return false; }\n");
+		}
+		bufferOfGroup.append("return true;\n}");
+		return bufferOfGroup.toString();
+	}
+
 	/**
 	 * Add a function to the function suite.
 	 * @param elementId id of the element.
 	 * @param group the group of this function.
 	 * @param validationType type of validation to use. Define in the ValidationsTypeEnum enumerator.
+	 * @param counter counter of functions for that element
 	 * @param parameters additional parameters when required.
 	 * If the type of validation is a range. The parameters have the minimum and the maximum value.
 	 * If the type of validation is a regular expression there is a parameter storing the expression.
 	 * @return boolean with the result of the operation
 	 */
 	public boolean addFunction(String group, String elementId, ValidationsTypeEnum validationType, 
-			String... parameters) {
+			int counter, String... parameters) {
 		if (elementId == null || validationType == null) {
 			return false;
 		}
 		JavaScriptFunction function = new JavaScriptFunction();
-		String functionName = FUNCTION_PREFIX + elementId;
+		String functionName = FUNCTION_PREFIX + elementId + "_" + String.valueOf(counter);
 		function.setFunctionName(functionName);
 		String content = generateFunctionContent(elementId, validationType, parameters);
 		function.setFunctionContent(content);
@@ -75,6 +108,7 @@ class JavaScriptGenerator {
 			hashMapOfSuites.put(group, newList);
 		} else {
 			functionList.add(function);
+			hashMapOfSuites.put(group, functionList);
 		}
 	}
 

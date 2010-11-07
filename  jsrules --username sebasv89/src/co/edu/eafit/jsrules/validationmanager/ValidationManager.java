@@ -2,6 +2,7 @@ package co.edu.eafit.jsrules.validationmanager;
 
 import java.io.IOException;
 import java.io.StringBufferInputStream;
+import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -64,19 +65,62 @@ public class ValidationManager implements IValidationManager {
 		return true; //TODO! esta mierda creo q vuela.
 	}
 
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public String generateScript(String schema) {
+	public String generateScript(String schema) throws Exception {
+		JavaScriptGenerator generator = new JavaScriptGenerator();
 		SAXBuilder sb = new SAXBuilder(false);
 		Document schemaDocument = null; 
 		try {
 			schemaDocument = sb.build(new StringBufferInputStream(schema));
 		} catch (Exception e) {
-			return "";
+			throw new Exception("error building xml");
 		}
 		Element rootElement = schemaDocument.getRootElement();
-		
-		JavaScriptGenerator generator = new JavaScriptGenerator();
-		return null;
+		List<Element> listOfGroups = (List<Element>) rootElement.getChildren();
+		for (Element group : listOfGroups) {
+			String groupName = group.getAttributeValue("formid");
+			List<Element> validationElementList = (List<Element>) group.getChildren(); 
+			for (Element validationElement : validationElementList) {
+				String elementId = validationElement.getAttributeValue("formElementId");
+				Element validations = validationElement.getChild(VALIDATIONS_ELEMENT_NAME);
+				List<Element> validationList = (List<Element>) validations.getChildren();
+				int counter = 1;
+				for (Element validation : validationList) {
+					ValidationsTypeEnum type = null;
+					String typeString = validation.getChild("type").getText();
+					if (typeString.equalsIgnoreCase("required")) {
+						type = ValidationsTypeEnum.REQUIREDFIELD;
+					} else if (typeString.equalsIgnoreCase("range")) { 
+						type = ValidationsTypeEnum.RANGE;
+					} else if (typeString.equalsIgnoreCase("regularExpression")) { 
+						type = ValidationsTypeEnum.REGULAREXPRESSION;
+					}
+					switch (type) {
+						case RANGE:
+							String min = validation.getChild("min").getText();
+							String max = validation.getChild("max").getText();
+							if (min == null || max == null) {
+								throw new Exception ("range validation does not contain min and max " 
+										+ "properties");
+							}
+							generator.addFunction(groupName, elementId, type, counter, min, max);	
+							break;
+						case REQUIREDFIELD:
+						generator.addFunction(groupName, elementId, type, counter);
+							break;
+						case REGULAREXPRESSION:
+							String expression = validation.getChild("regularExpression").getText();
+							if (expression == null) {
+								throw new Exception ("regular expression validation without pattern");
+							}
+							break;
+					}
+					counter++;
+				}
+			}
+		}
+		return generator.generateJavaScriptString();
 	}
 	
 

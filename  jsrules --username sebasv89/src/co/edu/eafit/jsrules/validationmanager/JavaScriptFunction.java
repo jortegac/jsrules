@@ -21,7 +21,7 @@ class JavaScriptFunction {
 		result.append(functionContent);
 		result.append("\n}");
 		
-		return "";
+		return result.toString();
 	}
 
 	/**
