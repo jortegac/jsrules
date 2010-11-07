@@ -1,9 +1,15 @@
 package co.edu.eafit.jsrules.validationmanager;
 
+import java.io.IOException;
+import java.io.StringBufferInputStream;
+
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.xml.sax.InputSource;
 
 import co.edu.eafit.jsrules.common.FormElementDetails;
 import co.edu.eafit.jsrules.common.WebFormDetails;
@@ -60,6 +66,15 @@ public class ValidationManager implements IValidationManager {
 
 	@Override
 	public String generateScript(String schema) {
+		SAXBuilder sb = new SAXBuilder(false);
+		Document schemaDocument = null; 
+		try {
+			schemaDocument = sb.build(new StringBufferInputStream(schema));
+		} catch (Exception e) {
+			return "";
+		}
+		Element rootElement = schemaDocument.getRootElement();
+		
 		JavaScriptGenerator generator = new JavaScriptGenerator();
 		return null;
 	}
