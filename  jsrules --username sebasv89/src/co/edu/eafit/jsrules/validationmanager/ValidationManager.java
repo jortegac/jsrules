@@ -89,6 +89,7 @@ public class ValidationManager implements IValidationManager {
 				for (Element validation : validationList) {
 					ValidationsTypeEnum type = null;
 					String typeString = validation.getChild("type").getText();
+					String message = validation.getChild("message").getText();
 					if (typeString.equalsIgnoreCase("required")) {
 						type = ValidationsTypeEnum.REQUIREDFIELD;
 					} else if (typeString.equalsIgnoreCase("range")) { 
@@ -104,16 +105,17 @@ public class ValidationManager implements IValidationManager {
 								throw new Exception ("range validation does not contain min and max " 
 										+ "properties");
 							}
-							generator.addFunction(groupName, elementId, type, counter, min, max);	
+							generator.addFunction(groupName, elementId, type, counter, message, min, max);	
 							break;
 						case REQUIREDFIELD:
-						generator.addFunction(groupName, elementId, type, counter);
+						generator.addFunction(groupName, elementId, type, counter, message);
 							break;
 						case REGULAREXPRESSION:
 							String expression = validation.getChild("regularExpression").getText();
 							if (expression == null) {
 								throw new Exception ("regular expression validation without pattern");
 							}
+							generator.addFunction(groupName, elementId, type, counter, message, expression);
 							break;
 					}
 					counter++;

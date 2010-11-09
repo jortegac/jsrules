@@ -1,7 +1,6 @@
 package co.edu.eafit.jsrules.validationmanager;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +21,8 @@ class JavaScriptGenerator {
 	
 	private static final String FUNCTION_PREFIX = "validationFunction_";
 	private static final String FUNCTION_GROUP_PREFIX = "validateForm_";
+
+	private static final String COLOR_FOR_ERRORS = "#FF9900";
 	/**
 	 * Default constructor.
 	 */
@@ -74,21 +75,22 @@ class JavaScriptGenerator {
 	 * @param elementId id of the element.
 	 * @param group the group of this function.
 	 * @param validationType type of validation to use. Define in the ValidationsTypeEnum enumerator.
-	 * @param counter counter of functions for that element
+	 * @param counter counter of functions for that element.
+	 * @param message message to show to the user in case of error.
 	 * @param parameters additional parameters when required.
 	 * If the type of validation is a range. The parameters have the minimum and the maximum value.
 	 * If the type of validation is a regular expression there is a parameter storing the expression.
 	 * @return boolean with the result of the operation
 	 */
 	public boolean addFunction(String group, String elementId, ValidationsTypeEnum validationType, 
-			int counter, String... parameters) {
+			int counter, String message, String... parameters) {
 		if (elementId == null || validationType == null) {
 			return false;
 		}
 		JavaScriptFunction function = new JavaScriptFunction();
 		String functionName = FUNCTION_PREFIX + elementId + "_" + String.valueOf(counter);
 		function.setFunctionName(functionName);
-		String content = generateFunctionContent(elementId, validationType, parameters);
+		String content = generateFunctionContent(elementId, validationType, message, parameters);
 		function.setFunctionContent(content);
 		addFunctionToHashMap(group, function);
 		return true;
@@ -122,7 +124,7 @@ class JavaScriptGenerator {
 	 * @return content of the function
 	 */
 	private String generateFunctionContent(String elementId, ValidationsTypeEnum validationType, 
-			String... parameters) {
+			String message, String... parameters) {
 		StringBuffer code = new StringBuffer();
 		//we always will need the element value,
 		code.append("var elementValue = " + getValueOfElementById(elementId) + "\n");
@@ -162,10 +164,25 @@ class JavaScriptGenerator {
 		}
 		code.append(codeOfValidation);
 		code.append("\nreturn true;\n");
-		code.append("} else { return false }");
+		code.append("} else { \n");
+		code.append(generateMessageAlert(message, elementId));
+		code.append("return false }");
 		return code.toString();
 	}
 	
+	/**
+	 * Generates an alert message.
+	 * @param message message to show.
+	 * @param elementId element id.
+	 * @return js code that shows the message.
+	 */
+	private String generateMessageAlert(String message, String elementId) {
+		StringBuffer code = new StringBuffer();
+		code.append("document.getElementById(\"" + elementId + "\").style.background = '" + COLOR_FOR_ERRORS + "';\n");
+		code.append("document.getElementById(\"" + elementId + "\").title = '" + message + "';\n");
+		return code.toString();
+	}
+
 	/**
 	 * Get the javascript sintax for the value of an element.
 	 * @param id id of the element.
