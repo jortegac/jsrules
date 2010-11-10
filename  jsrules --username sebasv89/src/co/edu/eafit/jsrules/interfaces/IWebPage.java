@@ -25,7 +25,7 @@ public interface IWebPage extends Service {
 	 */
 	boolean isValidWebPage(String webPageString);
 	
-	/**Validates is a web page has at least one form
+	/**Validates if a web page has at least one form
 	 * 
 	 * @param webPageString - The contents of an HTML web page
 	 * @return    True - If the HTML web page has at least one form <br>

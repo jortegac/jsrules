@@ -29,6 +29,7 @@ public class HTMLParserProxy implements IHTMLParserProxy {
         try {
             Parser p = new Parser(webPageString);
         } catch (ParserException e) {
+            e.printStackTrace();
             System.out.println("Error tratando de realizar el parser HTML");
             return false;
         }
