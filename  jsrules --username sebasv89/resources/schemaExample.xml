@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <validationschema>
-	<validationgroup id="" formid="" formname="">
-		<validationElement formElementId="nombre">
+	<validationgroup id="1" formid="myForm">
+		<validationelement id="1" formElementId="nombre">
 			<validations>
 				<validation>
 					<type>required</type>
+					<message>El campo es requerido</message>
 				</validation>
 				<validation>
 					<type>range</type>
 					<min>0</min>
 					<max>100</max>
+					<message>Rango inválido</message>
 				</validation>
 				<validation>
 					<type>regularExpression</type>
 					<regularExpression>[asdsadsad]</regularExpression>
+					<message>Error en la expresion regular</message>
 				</validation>
 			</validations>
-		</validationElement>
+		</validationelement>
 	</validationgroup>
 </validationschema>

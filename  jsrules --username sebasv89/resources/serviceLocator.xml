@@ -20,4 +20,8 @@
 		<interface>co.edu.eafit.jsrules.interfaces.IWebPage</interface>
 		<className>co.edu.eafit.jsrules.webpage.WebPage</className>
 	</service>	
+	<service>
+		<interface>co.edu.eafit.jsrules.interfaces.IProperty</interface>
+		<className>co.edu.eafit.jsrules.property.PropertyService</className>
+	</service>	
 </serviceLocator>
