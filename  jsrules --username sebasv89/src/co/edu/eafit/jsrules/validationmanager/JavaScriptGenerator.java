@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import co.edu.eafit.jsrules.interfaces.IProperty;
+import co.edu.eafit.jsrules.property.Properties;
+import co.edu.eafit.jsrules.servicelocator.ServiceLocator;
+
 /**
  * Manages the validation of a javascript file.
  * @author sebastian
@@ -22,7 +26,6 @@ class JavaScriptGenerator {
 	private static final String FUNCTION_PREFIX = "validationFunction_";
 	private static final String FUNCTION_GROUP_PREFIX = "validateForm_";
 
-	private static final String COLOR_FOR_ERRORS = "#FF9900";
 	/**
 	 * Default constructor.
 	 */
@@ -33,9 +36,10 @@ class JavaScriptGenerator {
 	
 	/**
 	 * Generate the complete javascript String.
-	 * @return
+	 * @return the code of the javascript generated.
+	 * @exception Exception in case of error connecting to the property service
 	 */
-	public String generateJavaScriptString() {
+	public String generateJavaScriptString() throws Exception {
 		bufferOfFile = new StringBuffer();
 		//add all the functions to the buffer.
 		for (List<JavaScriptFunction> list : hashMapOfSuites.values()) {
@@ -58,14 +62,19 @@ class JavaScriptGenerator {
 	 * @param key key of the validation group
 	 * @param list list of functions for that group.
 	 * @return the code with the function that validates that group.
+	 * @exception Exception in case of error connecting to the property service
 	 */
 	private String generateFunctionGroup(String key,
-			List<JavaScriptFunction> list) {
+			List<JavaScriptFunction> list) throws Exception {
 		StringBuffer bufferOfGroup = new StringBuffer();
 		bufferOfGroup.append("function " + FUNCTION_GROUP_PREFIX + key + "(){\n");
+		
 		for (JavaScriptFunction function : list) {
 			bufferOfGroup.append("if(!" + function.getFunctionName() + "()) { return false; }\n");
 		}
+		IProperty p = ServiceLocator.getService(IProperty.class);
+		String message = p.getPropertyByKey(Properties.SUCCESSFUL_MESSAGE).getValue();
+		bufferOfGroup.append("alert('" + message + "');");
 		bufferOfGroup.append("return true;\n}");
 		return bufferOfGroup.toString();
 	}
@@ -81,9 +90,10 @@ class JavaScriptGenerator {
 	 * If the type of validation is a range. The parameters have the minimum and the maximum value.
 	 * If the type of validation is a regular expression there is a parameter storing the expression.
 	 * @return boolean with the result of the operation
+	 * @exception Exception in case of not-founded property.
 	 */
 	public boolean addFunction(String group, String elementId, ValidationsTypeEnum validationType, 
-			int counter, String message, String... parameters) {
+			int counter, String message, String... parameters) throws Exception {
 		if (elementId == null || validationType == null) {
 			return false;
 		}
@@ -122,12 +132,15 @@ class JavaScriptGenerator {
 	 * If the type of validation is a range. The parameters have the minimum and the maximum value.
 	 * If the type of validation is a regular expression there is a parameter storing the expression.
 	 * @return content of the function
+	 * @param message message to show in case of error
+	 * @exception Exception in case of not-founded property.
 	 */
 	private String generateFunctionContent(String elementId, ValidationsTypeEnum validationType, 
-			String message, String... parameters) {
+			String message, String... parameters) throws Exception {
 		StringBuffer code = new StringBuffer();
 		//we always will need the element value,
 		code.append("var elementValue = " + getValueOfElementById(elementId) + "\n");
+		code.append("document.getElementById('" + elementId + "').style.background = \"\";\n");
 		
 		/*code of validation string depending of the type of validation. This String MUST finish with a 
 		contidional and a bracket*/
@@ -175,11 +188,21 @@ class JavaScriptGenerator {
 	 * @param message message to show.
 	 * @param elementId element id.
 	 * @return js code that shows the message.
+	 * @exception Exception in case of not-founded property.
 	 */
-	private String generateMessageAlert(String message, String elementId) {
+	private String generateMessageAlert(String message, String elementId) throws Exception{
+		IProperty iProperty = ServiceLocator.getService(IProperty.class);
+		String colorForError = iProperty.getPropertyByKey(Properties.ERROR_COLOR).getValue();
+		String messageType = iProperty.getPropertyByKey(Properties.MESSAGE_TYPE).getValue();
+ 
 		StringBuffer code = new StringBuffer();
-		code.append("document.getElementById(\"" + elementId + "\").style.background = '" + COLOR_FOR_ERRORS + "';\n");
-		code.append("document.getElementById(\"" + elementId + "\").title = '" + message + "';\n");
+		code.append("document.getElementById(\"" + elementId + "\").style.background = '" + colorForError + 
+				"';\n");
+		if (messageType.equals(Properties.ALERT_MESSAGE)) {
+			code.append("alert('" + message + "');\n");
+		} else {
+			code.append("document.getElementById(\"" + elementId + "\").title = '" + message + "';\n");
+		}
 		return code.toString();
 	}
 
