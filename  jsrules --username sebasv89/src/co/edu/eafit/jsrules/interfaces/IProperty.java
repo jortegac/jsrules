@@ -42,8 +42,7 @@ public interface IProperty extends Service {
      * @param p
      *            Property to update/save.
      * @throws Exception
-     *             in case of error connecting to the database.
-     * @see Properties
+     *             In case of error connecting to the database.
      */
     public void saveProperty(Property p) throws Exception;
 
