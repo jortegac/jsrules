@@ -1,7 +1,7 @@
 package co.edu.eafit.jsrules.common;
 
 /**
- * Details of the form attribute.
+ * Details of the form element.
  * @author Julian Ortega
  * @author Sebastian Velez
  *
@@ -12,7 +12,6 @@ public class FormElementDetails {
 	
 	private String id;
 	private String type;
-
 	
 	
 	/**

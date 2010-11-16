@@ -14,25 +14,25 @@ public class WebFormDetails {
 
 	
 	/**
-	 * @return the attributesList
+	 * @return The web form element list
 	 */
 	public FormElementDetails[] getElementList() {
 		return elementList;
 	}
 	/**
-	 * @param elementList the attributesList to set
+	 * @param List of elements to be set
 	 */
 	public void setAttributesList(FormElementDetails[] elementList) {
 		this.elementList = elementList;
 	}
 	/**
-	 * @return the id
+	 * @return The form id
 	 */
 	public String getId() {
 		return id;
 	}
 	/**
-	 * @param id the id to set
+	 * @param Set the form id
 	 */
 	public void setId(String id) {
 		this.id = id;
