@@ -1,7 +1,5 @@
 package co.edu.eafit.jsrules.webpage;
 
-import java.util.ArrayList;
-
 import co.edu.eafit.jsrules.common.FormElementDetails;
 import co.edu.eafit.jsrules.common.WebFormDetails;
 import co.edu.eafit.jsrules.interfaces.IWebPage;
