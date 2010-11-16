@@ -15,22 +15,21 @@ public interface IValidationSchema extends Service {
      * <p>
      * Preconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The web page exists</li>
+     * <li>The web page is valid</li>
      * </ol>
      * </p>
      * <p>
      * Postconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The validation schema is created</li>
      * </ol>
      * </p>
      * 
      * @param webPageString
      *            The web page contents
      * @return The validation schema
-     * @throws Exception
+     * @throws Exception If the is an error creating the schema
      */
     public String createSchema(String webPageString) throws Exception;
 }

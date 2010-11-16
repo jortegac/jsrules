@@ -16,21 +16,21 @@ public interface IValidationManager extends Service {
      * <p>
      * Preconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>There is at least one web form to be validated</li>
      * </ol>
      * </p>
      * <p>
      * Postconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The validation schema is created</li>
      * </ol>
      * </p>
      * 
      * @param formList
-     *            list of forms to create the schema.
-     * @return The string of the xml, or an empty String in case of error.
+     *            List of forms that exist in an HTML web page, which will be
+     *            used to create the validation schema.
+     * @return The XML that defines the validation schema . <br>
+     *         In case of error an empty String is returned.
      */
     String createSchema(WebFormDetails[] formList);
 
@@ -39,23 +39,25 @@ public interface IValidationManager extends Service {
      * <p>
      * Preconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The validation schema exists.</li>
+     * <li>The validation schema contains only permitted validations</li>
+     * <li>The web page exists</li>
+     * <li>The web page is valid</li>
      * </ol>
      * </p>
      * <p>
      * Postconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The validation schema is valid for the web page</li>
      * </ol>
      * </p>
      * 
      * @param schema
-     *            schema to be validated.
+     *            Validation schema to be validated.
      * @param webPageString
-     *            web page to be validated.
-     * @return if the schema is valid for the web page.
+     *            The contents of the HTML web page to be validated.
+     * @return True - If the validation schema is valid for the web page. <br>
+     *         False - Otherwise
      */
     boolean validateSchema(String schema, String webPageString);
 
@@ -64,21 +66,26 @@ public interface IValidationManager extends Service {
      * <p>
      * Preconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The validation schema exists.</li>
+     * <li>The validation schema contains only permitted validations</li>
      * </ol>
      * </p>
      * <p>
      * Postconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The JavaScript code to validate the HTML form is created</li>
+     * <li>The JavaScript code validates the restrictions established in the
+     * validation schema</li>
      * </ol>
      * </p>
      * 
      * @param schema
-     *            Schema of validation.
-     * @return String with the script
+     *            The validation schema for which the JavaScript will be
+     *            created.
+     * @return The JavaScript code to validate the HTML form, based on a
+     *         validation schema.
+     * @throws Exception
+     *             If there is an error generating the script.
      */
     String generateScript(String schema) throws Exception;
 

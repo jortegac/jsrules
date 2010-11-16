@@ -75,7 +75,7 @@ public class ValidationManager implements IValidationManager {
 		try {
 			schemaDocument = sb.build(new StringBufferInputStream(schema));
 		} catch (Exception e) {
-			throw new Exception("error building xml");
+			throw new Exception("Error building xml");
 		}
 		Element rootElement = schemaDocument.getRootElement();
 		List<Element> listOfGroups = (List<Element>) rootElement.getChildren();

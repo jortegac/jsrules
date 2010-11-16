@@ -16,38 +16,38 @@ public interface IWebPage extends Service {
      * <p>
      * Preconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The web page exists</li>
+     * <li>The web page is valid</li>
+     * <li>The web page contains at least one form</li>
      * </ol>
      * </p>
      * <p>
      * Postconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>A list of forms from the web page is created.</li>
+     * <li>The list has information of at least one form.</li>
      * </ol>
      * </p>
      * 
      * @param webPageString
      *            - The contents of a HTML web page
      * @return A list of WebFormDetails
+     * @throws Exception 
      */
     WebFormDetails[] getFormList(String webPageString) throws Exception;
 
     /**
-     * Validates if a HTML web page is valid
+     * Validates if a HTML web page is valid.
      * <p>
      * Preconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The web page exists</li>
      * </ol>
      * </p>
      * <p>
      * Postconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The web page is valid</li>
      * </ol>
      * </p>
      * 
@@ -59,19 +59,18 @@ public interface IWebPage extends Service {
     boolean isValidWebPage(String webPageString);
 
     /**
-     * Validates if a web page has at least one form
+     * Validates if a web page has at least one form.
      * <p>
      * Preconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The web page exists</li>
+     * <li>The web page is valid</li>
      * </ol>
      * </p>
      * <p>
      * Postconditions:
      * <ol>
-     * <li></li>
-     * <li></li>
+     * <li>The web page has at least one form</li>
      * </ol>
      * </p>
      * 
