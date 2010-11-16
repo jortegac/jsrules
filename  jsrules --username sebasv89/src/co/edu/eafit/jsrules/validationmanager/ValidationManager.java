@@ -20,7 +20,8 @@ import co.edu.eafit.jsrules.servicelocator.ServiceLocator;
 
 /**
  * Implements the services offered by the IValidationManager interface.
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public class ValidationManager implements IValidationManager {

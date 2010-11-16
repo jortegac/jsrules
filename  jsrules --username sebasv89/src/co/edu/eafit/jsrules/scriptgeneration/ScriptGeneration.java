@@ -10,7 +10,8 @@ import co.edu.eafit.jsrules.interfaces.IValidationManager;
 import co.edu.eafit.jsrules.servicelocator.ServiceLocator;
 
 /**
- * @author Julian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public class ScriptGeneration implements IScriptGeneration {

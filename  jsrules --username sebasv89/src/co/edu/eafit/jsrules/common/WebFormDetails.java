@@ -3,7 +3,8 @@ package co.edu.eafit.jsrules.common;
 
 /**
  * DTO of a web form
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public class WebFormDetails {

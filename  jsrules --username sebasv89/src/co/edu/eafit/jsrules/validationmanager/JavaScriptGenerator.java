@@ -10,7 +10,8 @@ import co.edu.eafit.jsrules.servicelocator.ServiceLocator;
 
 /**
  * Manages the validation of a javascript file.
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 class JavaScriptGenerator {

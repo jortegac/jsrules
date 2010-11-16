@@ -2,8 +2,8 @@ package co.edu.eafit.jsrules.property;
 
 /**
  * defines the constants for getting the properties.
- * @author Sebastian Velez.
- * @author Julian Ortega.
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public class Properties {

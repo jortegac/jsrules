@@ -3,7 +3,8 @@ package co.edu.eafit.jsrules.webpage;
 /**
  * Represents a web form.
  * 
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  * 
  */
 class WebForm {

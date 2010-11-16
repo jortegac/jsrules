@@ -2,7 +2,8 @@ package co.edu.eafit.jsrules.validationmanager;
 
 /**
  * Defines the availables validations.
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public enum ValidationsTypeEnum {

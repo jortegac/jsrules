@@ -2,7 +2,8 @@ package co.edu.eafit.jsrules.webpage;
 
 /**
  * Defines the properties of a form attribute.
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 class FormElement {

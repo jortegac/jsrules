@@ -9,7 +9,8 @@ import org.jdom.input.SAXBuilder;
 
 /**
  * Localize the service implementations for each interface.
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public class ServiceLocator {

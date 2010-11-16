@@ -2,7 +2,8 @@ package co.edu.eafit.jsrules.common;
 
 /**
  * Details of the form attribute.
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 public class FormElementDetails {

@@ -11,7 +11,8 @@ import org.htmlparser.util.ParserException;
 import co.edu.eafit.jsrules.common.WebFormDetails;
 
 /**
- * @author Julian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  * 
  */
 public class HTMLParserProxy implements IHTMLParserProxy {

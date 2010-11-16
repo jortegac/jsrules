@@ -1,7 +1,8 @@
 package co.edu.eafit.jsrules.validationmanager;
 
 /**
- * @author sebastian
+ * @author Julian Ortega
+ * @author Sebastian Velez
  *
  */
 class JavaScriptFunction {
