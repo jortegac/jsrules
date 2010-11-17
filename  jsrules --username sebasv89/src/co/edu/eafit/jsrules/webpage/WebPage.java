@@ -3,6 +3,7 @@ package co.edu.eafit.jsrules.webpage;
 import co.edu.eafit.jsrules.common.FormElementDetails;
 import co.edu.eafit.jsrules.common.WebFormDetails;
 import co.edu.eafit.jsrules.interfaces.IWebPage;
+import co.edu.eafit.jsrules.servicelocator.ServiceLocator;
 
 /**
  * Implements the interface IWebPage.
@@ -13,13 +14,13 @@ import co.edu.eafit.jsrules.interfaces.IWebPage;
  */
 public class WebPage implements IWebPage {
 
-    HTMLParserProxy parserProxy = new HTMLParserProxy();
+    IHTMLParserProxy parserProxy;
 
     /**
      * Constructor
      */
     public WebPage() {
-        parserProxy = new HTMLParserProxy();
+        parserProxy = ServiceLocator.getService(IHTMLParserProxy.class);
     }
 
     @Override
