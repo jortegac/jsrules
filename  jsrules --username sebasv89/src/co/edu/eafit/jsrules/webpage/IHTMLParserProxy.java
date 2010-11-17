@@ -3,7 +3,7 @@
  */
 package co.edu.eafit.jsrules.webpage;
 
-import co.edu.eafit.jsrules.common.WebFormDetails;
+import co.edu.eafit.jsrules.servicelocator.Service;
 
 /**Defines the services to be offered by the HTMLParserProxy entity.
  * 
@@ -11,7 +11,7 @@ import co.edu.eafit.jsrules.common.WebFormDetails;
  * @author Sebastian Velez
  *
  */
-public interface IHTMLParserProxy 
+public interface IHTMLParserProxy  extends Service
 {
     /**Validates if a HTML web page is valid.
      * @param webPageString - The contents of the HTML web page
