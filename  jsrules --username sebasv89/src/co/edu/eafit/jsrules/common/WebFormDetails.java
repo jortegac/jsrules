@@ -6,7 +6,7 @@ package co.edu.eafit.jsrules.common;
  * identification and the list of elements contained by the form.
  * @author Julian Ortega
  * @author Sebastian Velez
- *
+ * 
  */
 public class WebFormDetails {
 
