@@ -1,0 +1,1 @@
+The pages are given as parameters. The component creates an XML file to fill, and when both things (web page and xml properly filled) are ready, a javascript file is generated.
