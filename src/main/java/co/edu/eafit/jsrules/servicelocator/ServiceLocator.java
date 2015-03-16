@@ -2,6 +2,9 @@ package co.edu.eafit.jsrules.servicelocator;
 
 import java.util.HashMap;
 import java.util.List;
+import java.io.File;
+import java.net.URI;
+import java.io.InputStream;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -15,7 +18,7 @@ import org.jdom.input.SAXBuilder;
  */
 public class ServiceLocator {
 
-	private static final String SERVICE_LOCATOR_PATH = "resources/serviceLocator.xml";
+	private static final String SERVICE_LOCATOR_PATH = "/serviceLocator.xml";	
 	
 	private static HashMap<Class<? extends Service>, String> serviceDefinition;
 
@@ -43,7 +46,7 @@ public class ServiceLocator {
 			resultClass = (T) Class.forName(className).newInstance();
 			return resultClass;
 		} catch (Exception e) {
-			throw new RuntimeException("class not found!");
+			throw new RuntimeException(className + " was not found!");
 		}
 	}
 
@@ -52,9 +55,12 @@ public class ServiceLocator {
 	 * @throws Exception in case of error loading services.
 	 */
 	private static void loadServiceDefinition() throws Exception {
+
+		InputStream file = ClassLoader.class.getResourceAsStream(SERVICE_LOCATOR_PATH); 
+
 		serviceDefinition = new HashMap<Class<? extends Service>, String>();
 		SAXBuilder sb = new SAXBuilder(false);
-		Document doc1 = sb.build(SERVICE_LOCATOR_PATH);
+		Document doc1 = sb.build(file);
 		Element root = doc1.getRootElement();
 		@SuppressWarnings("unchecked")
 		List<Element> availableServicesList = root.getChildren();
